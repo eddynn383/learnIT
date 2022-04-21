@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import { useNavigate } from "react-router-dom"
-import { useAuth } from '../context/AuthContext'
-import { Container, Card, Button, Alert } from 'react-bootstrap'
+import React, { useState } from 'react';
+import useAuth from '../hooks/useAuth';
+import { useNavigate } from "react-router-dom";
+import { Container, Card, Button, Alert } from 'react-bootstrap';
 
 const Admin = () => {
     const [message, setMessage] = useState('')
@@ -14,7 +14,6 @@ const Admin = () => {
         try {
             await signout();
             navigate('/signin');
-            setMessage("Log out successfully!")
         } catch (error) {
             setMessage("Failed to log out")
         }

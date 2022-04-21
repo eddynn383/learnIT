@@ -25,14 +25,16 @@ function App() {
                 <Route path="signin" element={<Signin />} />
                 <Route path="unauthorized" element={<Unauthorized />} />
                 {/* Protected routes */}
-                <Route element={<RequireAuth allowedRoles={[ROLES.Learner]} />}>
-                    <Route path="/" element={<Learner />} />
-                </Route>
-                <Route element={<RequireAuth allowedRoles={[ROLES.Tutor]} />}>
-                    <Route path="/tutor" element={<Tutor />} />
-                </Route>
-                <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
-                    <Route path="admin" element={<Admin />} />
+                <Route element={<RequireAuth />}>
+                    {/* <Route element={<RequireAuth allowedRoles={[ROLES.Admin, ROLES.Tutor, ROLES.Learner]} />}> */}
+                        <Route path="/" element={<Learner />} />
+                    {/* </Route> */}
+                    {/* <Route element={<RequireAuth allowedRoles={[ROLES.Admin, ROLES.Tutor]} />}> */}
+                        <Route path="/tutor" element={<Tutor />} />
+                    {/* </Route> */}
+                    {/* <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}> */}
+                        <Route path="admin" element={<Admin />} />
+                    {/* </Route> */}
                 </Route>
                 {/* catch all */}
                 <Route path="*" element={<Missing />} />

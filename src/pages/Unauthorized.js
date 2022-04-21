@@ -1,22 +1,20 @@
-import React, { useState } from 'react'
-import { useNavigate } from "react-router-dom"
-import { useAuth } from '../context/AuthContext'
-import { Container, Card, Button, Alert } from 'react-bootstrap'
+import React, { useState } from 'react';
+import useAuth from '../hooks/useAuth';
+import { useNavigate } from "react-router-dom";
+import { Container, Card, Button, Alert } from 'react-bootstrap';
 
 const Unauthorized = () => {
     const [message, setMessage] = useState('')
     const navigate = useNavigate()
-    const { signout } = useAuth()
+    const { signout, currentUser } = useAuth()
 
     const goBack = () => navigate(-1);
 
     const handleLogout = async () => {
         setMessage('')
-
+        console.log(currentUser && currentUser)
         try {
             await signout();
-
-            setMessage("Log out successfully!")
         } catch (error) {
             setMessage("Failed to log out")
         }
@@ -30,6 +28,7 @@ const Unauthorized = () => {
                         {message && <Alert variant="success">{message}</Alert>}
                         <h2>Unauthorized</h2>
                         <p>You do not have access to the requested page.</p>
+                        <Alert variant="secondary">{currentUser && currentUser.email}</Alert>
                         <Button onClick={handleLogout} className="w-100 mb-4" type="submit">Logout</Button>
                         <Button onClick={goBack} className="w-100" type="submit">Go Back</Button>
                     </Card.Body>

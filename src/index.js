@@ -1,18 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import { AuthProvider } from "./context/AuthContext";
+import { FirebaseProvider } from "./context/FirebaseContext";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 ReactDOM.render(
     <React.StrictMode>
         <BrowserRouter>
-            <AuthProvider>
+            <FirebaseProvider>
                 <Routes>
                     <Route path="/*" element={<App />} />
                 </Routes>
-            </AuthProvider>
+            </FirebaseProvider>
         </BrowserRouter>
     </React.StrictMode>,
     document.getElementById("root")

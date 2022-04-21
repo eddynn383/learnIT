@@ -1,9 +1,7 @@
-import React, { useState, useRef } from 'react'
-import { useAuth } from '../context/AuthContext'
-import { Link } from 'react-router-dom'
-import { Container, Card, Form, Button, Alert } from 'react-bootstrap'
-import { setDoc, doc } from "firebase/firestore";
-import { db } from "../firebase"
+import React, { useState, useRef } from 'react';
+import useAuth from '../hooks/useAuth';
+import { Link } from 'react-router-dom';
+import { Container, Card, Form, Button, Alert } from 'react-bootstrap';
 
 // const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 // const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -14,11 +12,15 @@ const Signup = () => {
     const emailRef = useRef()
     const passwordRef = useRef()
     const passwordConfirmationRef = useRef()
-    const { signup, currentUser } = useAuth()
+
+    const { signup, setDB, currentUser } = useAuth()
+
     const [message, setMessage] = useState('')
     const [type, setType] = useState('')
     const [loading, setLoading] = useState(false)
     const [messageType, setMessageType] = useState('success')
+
+    console.log(currentUser && currentUser)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -31,22 +33,21 @@ const Signup = () => {
             setLoading(true)
             const res = await signup(emailRef.current.value, passwordRef.current.value)
             const user = res.user
-
-            await setDoc(doc(db, 'users', user.uid), {
+            
+            await setDB('users', user.uid, {
                 uid: user.uid,
-                role: 100,
+                roles: [100],
                 email: user.email
             })
 
             setMessageType('success')
             setMessage('User was successfully created!')
-
-            console.log(currentUser)
         } catch (err) {
             console.log(err)
             setMessageType('danger')
             setMessage('Failed to create an account')
         }
+
         setLoading(false)
     }
 
@@ -62,7 +63,6 @@ const Signup = () => {
                         <Card.Body>
                             <h2 className="text-center mb-4">Sign Up</h2>
                             {message && <Alert variant={messageType}>{message}</Alert>}
-                            {currentUser && currentUser.email}
                             <Form onSubmit={handleSubmit}>
                                 <Form.Group id="email" className="mb-4">
                                     <Form.Label>Email</Form.Label>
@@ -77,7 +77,7 @@ const Signup = () => {
                                     <Form.Control type={type === '' ? 'password' : type} ref={passwordConfirmationRef} variant="danger" required />
                                 </Form.Group>
                                 <Form.Check type="checkbox" id="show-password" label="Show Password" className="mb-4" onClick={handleCheckbox}/>
-                                <Button disabled={loading} className="w-100" type="submit">Sing Up</Button>
+                                <Button disabled={loading} className="w-100" type="submit">Sign Up</Button>
                             </Form>
                         </Card.Body>
                     </Card>

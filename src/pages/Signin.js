@@ -1,52 +1,46 @@
 import React, { useState, useRef } from "react";
-import { useAuth } from '../context/AuthContext'
+import useAuth from '../hooks/useAuth';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { Container, Card, Form, Button, Alert } from 'react-bootstrap'
-import { getDoc, doc } from "firebase/firestore";
-import { db } from "../firebase"
+import { Container, Card, Form, Button, Alert } from 'react-bootstrap';
+
 
 const Signin = () => {
     const emailRef = useRef()
     const passwordRef = useRef()
-    const { signin, currentUser, setCurrentRole, currentRole } = useAuth()
+
+    const { signin, getDB, setCurrentUser } = useAuth()
+
     const [message, setMessage] = useState('')
     const [type, setType] = useState('')
     const [loading, setLoading] = useState(false)
+    
     const navigate = useNavigate()
     const location = useLocation()
     const from = location.state?.from?.pathname || "/"
 
+    console.log(location)
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            setMessage('')
             setLoading(true)
 
             const res = await signin(emailRef.current.value, passwordRef.current.value)
             const user = res.user
-            const docRef = doc(db, "users", user.uid)
-            const docSnap = await getDoc(docRef)
-            const elem = docSnap.data()
+            const db = await getDB('users', user.uid)
 
-            if (docSnap.exists()) {
-                console.log("Document data:", elem.role);
-                setCurrentRole(elem.role)
-            } else {
-                console.log("No such document!");
+            if (db.exists()) {
+                setCurrentUser({
+                    ...user,
+                    roles: db.data().roles
+                })
             }
 
-            if (currentUser) {
-                console.log(currentUser)
-                console.log(currentRole)
-            }
-            console.log(from)
             navigate(from, { replace: true })
-            setMessage('Sign in was successfully!')
         } catch (error) {
             setMessage('Failed to sign in')
             console.log(error)
         }
-        setLoading(false)
     }
 
     const handleCheckbox = (e) => {
@@ -71,7 +65,7 @@ const Signin = () => {
                                     <Form.Control type={type === '' ? 'password' : type} ref={passwordRef} required />
                                 </Form.Group>
                                 <Form.Check type="checkbox" id="show-password" label="Show Password" className="mb-4" onClick={handleCheckbox}/>
-                                <Button disabled={loading} className="w-100" type="submit">Sing In</Button>
+                                <Button disabled={loading} className="w-100" type="submit">Sign In</Button>
                                 {/* <Button onClick={handleClick} className="w-100" type="submit">Get Role</Button> */}
                             </Form>
                         </Card.Body>
