@@ -15,6 +15,7 @@ const Unauthorized = () => {
         console.log(currentUser && currentUser)
         try {
             await signout();
+            navigate('/signin')
         } catch (error) {
             setMessage("Failed to log out")
         }

@@ -8,7 +8,7 @@ const Signin = () => {
     const emailRef = useRef()
     const passwordRef = useRef()
 
-    const { signin, getDB, setCurrentUser } = useAuth()
+    const { signin, getDB, setCurrentUser, currentUser } = useAuth()
 
     const [message, setMessage] = useState('')
     const [type, setType] = useState('')
@@ -16,9 +16,10 @@ const Signin = () => {
     
     const navigate = useNavigate()
     const location = useLocation()
-    const from = location.state?.from?.pathname || "/"
 
-    console.log(location)
+    const from = location.state?.from?.pathname || '/'
+
+    console.log(from)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -34,9 +35,20 @@ const Signin = () => {
                     ...user,
                     roles: db.data().roles
                 })
-            }
 
-            navigate(from, { replace: true })
+                console.log(db.data().roles)
+                switch (db.data().roles[0]) {
+                    case 100: navigate('/learner', { replace: true })
+                        break;
+                    case 200: navigate('/tutor', { replace: true })
+                        break;
+                    case 900: navigate('/admin', { replace: true })
+                        break;
+                    default: navigate(from, { replace: true })
+                        break;
+                }
+            }
+       
         } catch (error) {
             setMessage('Failed to sign in')
             console.log(error)
