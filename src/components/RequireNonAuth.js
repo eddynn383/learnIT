@@ -3,10 +3,10 @@ import useAuth from "../hooks/useAuth";
 
 const RequireNonAuth = () => {
     const { currentUser } = useAuth()
-    const location = useLocation()
-
+    // const location = useLocation()
+    console.log(currentUser)
     return (
-        !currentUser ? <Outlet /> : <Navigate to='/unauthorized' state={{ from: location }} replace />
+        !currentUser && <Outlet />
     )
 }
 

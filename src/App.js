@@ -1,4 +1,5 @@
 import React from 'react';
+import Dashboard from './pages/Dashboard';
 import Signup from './pages/Signup';
 import Signin from './pages/Signin';
 import Learner from './pages/Learner';
@@ -22,17 +23,20 @@ function App() {
         <Routes>
             <Route path="/" element={<Layout />}>
                 {/* Public routes */}
-                <Route element={<RequireNonAuth />}>
+                <Route path="/" element={<Dashboard />} />
+
+                {/* <Route element={<RequireNonAuth />}> */}
                     <Route path="signup" element={<Signup />} />
                     <Route path="signin" element={<Signin />} />
-                </Route>
+                {/* </Route> */}
+                
                 <Route path="unauthorized" element={<Unauthorized />} />
                 {/* Protected routes */}
                 <Route element={<RequireAuth allowedRoles={[ROLES.Learner]} />}>
-                    <Route path="/learner" element={<Learner />} />
+                    <Route path="learner" element={<Learner />} />
                 </Route>
                 <Route element={<RequireAuth allowedRoles={[ROLES.Tutor]} />}>
-                    <Route path="/tutor" element={<Tutor />} />
+                    <Route path="tutor" element={<Tutor />} />
                 </Route>
                 <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
                     <Route path="admin" element={<Admin />} />

@@ -55,4 +55,4 @@ export const FirebaseProvider = ({ children }) => {
     )
 }
 
-export default FirebaseContext;
+export default FirebaseContext
