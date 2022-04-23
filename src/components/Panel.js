@@ -1,4 +1,4 @@
-import React from 'react';
+import '../assets/design/panel.scss';
 
 const Panel = (o) => {
 

@@ -1,22 +1,22 @@
-import React from 'react';
 import Link from '../components/Link';
 import useNavigation from '../hooks/useNavigation';
+import '../assets/design/navigation.scss';
 
 const Navigation = (o) => {
-    const navLinks = useNavigation()
+    const links = useNavigation()
 
-    console.log(navLinks)
     return (
-        <nav>
+        <nav className={o.class}>
             <ul>
                 {
-                    navLinks.map((navLink, idx) => {
-                        console.log(navLink)
-                        navLink && (
-                            <li>
-                                <Link to={navLink.url} class={navLink.class}>{navLink.name}</Link>
+                    links.map((link, idx) => {
+                        console.log(link)
+                        return (
+                            <li key={idx}>
+                                <Link to={link.url} class={link.class} iconPos={link.iconPos} iconValue={link.iconValue} >{link.name}</Link>
                             </li>
                         )
+                        
                     })
                 }
             </ul>

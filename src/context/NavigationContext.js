@@ -1,27 +1,37 @@
 import { createContext, useState, useEffect } from 'react';
 
-const defaultNav = [
-    {
-        name: 'link1',
-        url: '/link1',
-        class: 'link link--one'
-    },
-    {
-        name: 'link2',
-        url: '/link2',
-        class: 'link link--two'
-    },
-    {
-        name: 'link3',
-        url: '/link3',
-        class: 'link link--three'
-    },
-    {
-        name: 'link4',
-        url: '/link4',
-        class: 'link link--four'
-    }
-]
+const defaultNav = [{
+    name: 'Dashboard',
+    url: '/dashboard',
+    class: 'link link--dashboard',
+    iconPos: 'before',
+    iconValue: 'faGaugeHigh'
+
+}, {
+    name: 'Catalog',
+    url: '/catalog',
+    class: 'link link--catalog',
+    iconPos: 'before',
+    iconValue: 'faBook'
+}, {
+    name: 'My courses',
+    url: '/mycourses',
+    class: 'link link--mycourses',
+    iconPos: 'before',
+    iconValue: 'faSwatchbook'
+}, {
+    name: 'My competencies',
+    url: '/mycompetencies',
+    class: 'link link--mycompetencies',
+    iconPos: 'before',
+    iconValue: 'faUserGraduate'
+}, {
+    name: 'Settings',
+    url: '/settings',
+    class: 'link link--settings',
+    iconPos: 'before',
+    iconValue: 'faGear'
+}]
 
 const NavigationContext = createContext(defaultNav)
 

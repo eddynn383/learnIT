@@ -1,4 +1,4 @@
-import React from 'react';
+import '../assets/design/logo.scss';
 
 const Logo = (o) => {
     const inlineStyle = {

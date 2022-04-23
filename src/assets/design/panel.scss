@@ -1,0 +1,16 @@
+.panel {
+    &--left {
+        padding: 20px;
+        box-shadow: 4px 0px 8px rgba(0, 0, 0, 0.1);
+    }
+    &--left &--top {
+        height: 81px;
+    }
+    &--left &--bottom {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        height: calc(100% - 81px);
+        padding-top:20px;
+    }
+}
