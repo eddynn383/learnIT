@@ -5,13 +5,17 @@ import { Container, Card, Button, Alert } from 'react-bootstrap';
 
 const Admin = () => {
     const [message, setMessage] = useState('')
+
     const navigate = useNavigate()
-    const { signout, currentUser } = useAuth()
+    
+    const { signout, setDB, currentUser } = useAuth()
 
     const handleLogout = async () => {
         setMessage('')
 
         try {
+            console.log(currentUser)
+            await setDB('roles', currentUser.roles[0].toString(), {active: false})
             await signout();
             navigate('/signin');
         } catch (error) {

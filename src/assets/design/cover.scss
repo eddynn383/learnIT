@@ -1,0 +1,18 @@
+.cover {
+    overflow: hidden;
+    &[data-size="small"] {
+        width: 24px;
+        height: 24px;
+    }
+    &[data-size="medium"] {
+        width: 40px;
+        height: 40px;
+    }
+    &[data-size="large"] {
+        width: 48px;
+        height: 48px;
+    }
+    &[data-type="rounded"] {
+        border-radius: 50%;
+    }
+}

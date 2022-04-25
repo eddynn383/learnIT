@@ -6,7 +6,7 @@ import { Container, Card, Button, Alert } from 'react-bootstrap';
 const Tutor = () => {
     const [message, setMessage] = useState('')
     const navigate = useNavigate()
-    const { signout, currentUser } = useAuth()
+    const { signout, setDB, currentUser } = useAuth()
 
     console.log(currentUser && currentUser)
 
@@ -14,6 +14,7 @@ const Tutor = () => {
         setMessage('')
 
         try {
+            await setDB('roles', currentUser.roles[0].toString(), {active: false})
             await signout();
             navigate('/signin');
         } catch (error) {

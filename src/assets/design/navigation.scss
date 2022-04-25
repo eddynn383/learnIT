@@ -23,7 +23,12 @@
                 background-color: transparent;
                 border-radius: 5px;
                 transition: .3s ease-in-out;
-                &:hover {
+                &:hover,
+                &:focus {
+                    background-color: #F7D5D4;
+                    color: #BF4640;
+                }
+                &.link--active {
                     background-color: #BF4640;
                     color: #fff;
                 }

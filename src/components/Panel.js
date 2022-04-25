@@ -1,15 +1,13 @@
 import '../assets/design/panel.scss';
 
 const Panel = (o) => {
-
-    const inlineStyle = {
-        width: o.width,
-        minWidth: o.minWidth,
-        maxWidth: o.maxWidth
+    const innerProps = {
+        className: o.class,
+        style: o.style
     }
 
     return (
-        <div className={o.class} style={inlineStyle}>
+        <div {...innerProps}>
             {o.children}
         </div>
     )

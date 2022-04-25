@@ -1,14 +1,15 @@
 import React, { useState, useRef } from "react";
 import useAuth from '../hooks/useAuth';
+import Input from '../components/Input';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Container, Card, Form, Button, Alert } from 'react-bootstrap';
 
 
-const Signin = () => {
+const Signin = (o) => {
     const emailRef = useRef()
     const passwordRef = useRef()
 
-    const { signin, getDB, setCurrentUser, currentUser } = useAuth()
+    const { signin, getDB, setDB, setCurrentUser } = useAuth()
 
     const [message, setMessage] = useState('')
     const [type, setType] = useState('')
@@ -20,6 +21,21 @@ const Signin = () => {
     const from = location.state?.from?.pathname || '/'
 
     console.log(from)
+
+    const props = {
+        email: {
+            class: ['input', 'input--email'],
+            type: 'email',
+            ref: emailRef,
+            required: true
+        },
+        password: {
+            class: ['input', 'input--password'],
+            type: type === '' ? 'password' : type,
+            ref: passwordRef,
+            required: true
+        }
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -35,8 +51,6 @@ const Signin = () => {
                     ...user,
                     roles: db.data().roles
                 })
-
-                console.log(db.data().roles)
                 switch (db.data().roles[0]) {
                     case 100: navigate('/learner', { replace: true })
                         break;
@@ -48,6 +62,10 @@ const Signin = () => {
                         break;
                 }
             }
+
+            await setDB('roles', db.data().roles[0].toString(), {
+                active: true
+            })
        
         } catch (error) {
             setMessage('Failed to sign in')
@@ -70,11 +88,11 @@ const Signin = () => {
                             <Form onSubmit={handleSubmit}>
                                 <Form.Group id="email" className="mb-4">
                                     <Form.Label>Email</Form.Label>
-                                    <Form.Control type="email" ref={emailRef} required />
+                                    <Input {...props.email} />
                                 </Form.Group>
                                 <Form.Group id="password" className="mb-4">
                                     <Form.Label>Password</Form.Label>
-                                    <Form.Control type={type === '' ? 'password' : type} ref={passwordRef} required />
+                                    <Input {...props.password} />
                                 </Form.Group>
                                 <Form.Check type="checkbox" id="show-password" label="Show Password" className="mb-4" onClick={handleCheckbox}/>
                                 <Button disabled={loading} className="w-100" type="submit">Sign In</Button>

@@ -1,5 +1,6 @@
 .panel {
     &--left {
+        width: 400px;
         padding: 20px;
         box-shadow: 4px 0px 8px rgba(0, 0, 0, 0.1);
     }
@@ -12,5 +13,13 @@
         gap: 20px;
         height: calc(100% - 81px);
         padding-top:20px;
+    }
+    &--right {
+        width: calc(100% - 400px)
+    }
+    &--right &--top {
+        display: flex;
+        justify-content: space-between;
+        padding: 30px;
     }
 }

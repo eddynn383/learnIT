@@ -1,36 +1,31 @@
-import { createContext, useState, useEffect } from 'react';
+import { createContext } from 'react';
 
 const defaultNav = [{
-    name: 'Dashboard',
+    text: 'Dashboard',
     url: '/dashboard',
-    class: 'link link--dashboard',
-    iconPos: 'before',
-    iconValue: 'faGaugeHigh'
+    classes: ['link', 'link--dashboard'],
+    iconBefore: 'faGaugeHigh'
 
 }, {
-    name: 'Catalog',
+    text: 'Catalog',
     url: '/catalog',
-    class: 'link link--catalog',
-    iconPos: 'before',
-    iconValue: 'faBook'
+    classes: ['link', 'link--catalog'],
+    iconBefore: 'faBook'
 }, {
-    name: 'My courses',
+    text: 'My courses',
     url: '/mycourses',
-    class: 'link link--mycourses',
-    iconPos: 'before',
-    iconValue: 'faSwatchbook'
+    classes: ['link', 'link--mycourses'],
+    iconBefore: 'faSwatchbook'
 }, {
-    name: 'My competencies',
+    text: 'My competencies',
     url: '/mycompetencies',
-    class: 'link link--mycompetencies',
-    iconPos: 'before',
-    iconValue: 'faUserGraduate'
+    classes: ['link', 'link--mycompetencies'],
+    iconBefore: 'faUserGraduate'
 }, {
-    name: 'Settings',
+    text: 'Settings',
     url: '/settings',
-    class: 'link link--settings',
-    iconPos: 'before',
-    iconValue: 'faGear'
+    classes: ['link', 'link--settings'],
+    iconBefore: 'faGear'
 }]
 
 const NavigationContext = createContext(defaultNav)

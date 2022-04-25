@@ -8,13 +8,15 @@ const Learner = () => {
 
     const navigate = useNavigate()
 
-    const { signout, currentUser } = useAuth()
+    const { signout, setDB, currentUser } = useAuth()
 
     console.log(currentUser && currentUser)
 
     const handleLogout = async () => {
+        setMessage('')
 
         try {
+            await setDB('roles', currentUser.roles[0].toString(), { active: false })
             await signout();
             navigate('/signin');
         } catch (error) {
