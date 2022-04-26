@@ -1,11 +1,11 @@
-import { addClass } from '../functions/utils';
+import { addClass, classModifier } from '../functions/utils';
 import '../assets/design/logo.scss';
 
 const Logo = (o) => {
-    const defClass = 'logo'
-    const classes = addClass(defClass, o.class)
+    const defaultClass = 'logo'
+    const classes = classModifier(defaultClass, o.class)
     const outerProps = {
-        className: classes
+        className: addClass(classes)
     }
     const innerProps = {
         src: o.url,

@@ -1,12 +1,12 @@
-import { addClass } from '../functions/utils';
-import '../assets/design/input.scss'
+import { addClass, classModifier } from '../functions/utils';
+import '../assets/design/input.scss';
 
 const input = (o) => {
-    const defClass = 'input'
-    const classes = addClass(defClass, o.className)
+    const defaultClass = 'input'
+    const classes = classModifier(defaultClass, o.class)
 
     const outerProps = {
-        className: classes
+        className: addClass(classes)
     }
 
     const innerProps = {

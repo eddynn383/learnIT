@@ -3,29 +3,34 @@ import { createContext } from 'react';
 const defaultNav = [{
     text: 'Dashboard',
     url: '/dashboard',
-    classes: ['link', 'link--dashboard'],
+    classes: ['dashboard'],
     iconBefore: 'faGaugeHigh'
 
 }, {
     text: 'Catalog',
     url: '/catalog',
-    classes: ['link', 'link--catalog'],
+    classes: ['catalog'],
     iconBefore: 'faBook'
 }, {
     text: 'My courses',
     url: '/mycourses',
-    classes: ['link', 'link--mycourses'],
+    classes: ['mycourses'],
     iconBefore: 'faSwatchbook'
 }, {
     text: 'My competencies',
     url: '/mycompetencies',
-    classes: ['link', 'link--mycompetencies'],
+    classes: ['mycompetencies'],
     iconBefore: 'faUserGraduate'
 }, {
     text: 'Settings',
     url: '/settings',
-    classes: ['link', 'link--settings'],
+    classes: ['settings'],
     iconBefore: 'faGear'
+}, {
+    text: 'Test',
+    url: '/test',
+    classes: ['test'],
+    iconBefore: 'faVial'
 }]
 
 const NavigationContext = createContext(defaultNav)

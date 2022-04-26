@@ -12,6 +12,7 @@ import Tutor from './Tutor';
 import Admin from './Admin';
 import Missing from './Missing';
 import Unauthorized from './Unauthorized';
+import Test from './Test';
 
 import '../assets/design/layout.scss';
 
@@ -36,6 +37,7 @@ const Main = (o) => {
                     {/* Public routes */}
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/catalog" element={<Catalog />} />
+                    <Route path="/test" element={<Test />} />
 
                     {/* <Route element={<RequireNonAuth />}> */}
                         <Route path="signup" element={<Signup />} />

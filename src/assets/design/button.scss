@@ -1,0 +1,24 @@
+.button {
+    &--reset {
+        background-color: transparent;
+        border: none;
+        padding: 0;
+        margin: 0;
+    }
+    &--search {
+        position: absolute;
+        top: 50%;
+        right: 4px;
+        padding: 7px 8px;
+        transform: translateY(-50%);
+        border-radius: 4px;
+        font-size: 16px;
+        transition: .3s ease-in-out;
+        cursor: pointer;
+        &:hover,
+        &:focus {
+            background-color: #BF4640;
+            color: #fff;
+        }
+    }
+}

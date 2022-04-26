@@ -1,13 +1,13 @@
 import Calendar from 'react-calendar'
 import '../assets/design/calendarSchedule.scss';
 import 'react-calendar/dist/Calendar.css';
-import { addClass } from '../functions/utils';
+import { addClass, classModifier } from '../functions/utils';
 
 const CalendarSchedule = (o) => {
-    const defClass = 'calendar'
-    const classes = addClass(defClass, o.class)
+    const defaultClass = 'calendar'
+    const classes = classModifier(defaultClass, o.class)
     const outerProps = {
-        className: classes
+        className: addClass(classes)
     }
     return (
         <div {...outerProps}>

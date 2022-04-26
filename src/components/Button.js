@@ -1,14 +1,14 @@
 import Text from './Text';
 import Icon from './Icon';
-import { addClass } from '../functions/utils';
+import { classModifier, addClass } from '../functions/utils';
 import '../assets/design/button.scss'
 
 const Button = (o) => {
-    const defClass = 'button'
-    const classes = addClass(defClass, o.className)
+    const defaultClass = 'button'
+    const classes = classModifier(defaultClass, o.class)
     
     const outerProps = {
-        className: classes,
+        className: addClass(classes),
         id: o.id,
         type: o.type,
         'data-size': o.size

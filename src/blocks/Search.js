@@ -1,24 +1,25 @@
 import Input from '../components/Input';
 import Button from '../components/Button';
-import { addClass } from '../functions/utils';
+import { addClass, classModifier } from '../functions/utils';
+import '../assets/design/search.scss'
 
 const Search = (o) => {
-    console.log(o)
-    const defClass = 'module'
-    const classes = addClass(defClass, o.class)
+    // console.log(o)
+    const defaultClass = 'module'
+    const classes = classModifier(defaultClass, o.class)
     const outerProps = {
-        className: classes,
+        className: addClass(classes),
     }
     const innerProps = {
         input: {
-            className: o.input.class,
+            class: o.input.class,
             id: o.input.id,
             type: o.input.type,
             'data-size': o.input.size,
             placeholder: o.input.placeholder,
         },
         button: {
-            className: o.button.class,
+            class: o.button.class,
             type: 'button',
             iconBefore: o.button.iconBefore
         }

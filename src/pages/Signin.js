@@ -24,13 +24,13 @@ const Signin = (o) => {
 
     const props = {
         email: {
-            class: ['input', 'input--email'],
+            class: ['email'],
             type: 'email',
             ref: emailRef,
             required: true
         },
         password: {
-            class: ['input', 'input--password'],
+            class: ['password'],
             type: type === '' ? 'password' : type,
             ref: passwordRef,
             required: true

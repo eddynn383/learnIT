@@ -1,12 +1,12 @@
-import { addClass } from '../functions/utils';
+import { addClass, classModifier } from '../functions/utils';
 import '../assets/design/cover.scss';
 
 const Cover = (o) => {
-    const defClass = 'cover'
-    const classes = addClass(defClass, o.class)
+    const defaultClass = 'cover'
+    const classes = classModifier(defaultClass, o.class)
 
     const outerProps = {
-        className: classes,
+        className: addClass(classes),
         'data-type': o.type,
         'data-size': o.size,
     }

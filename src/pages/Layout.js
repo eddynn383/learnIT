@@ -4,8 +4,9 @@ import Panel from '../components/Panel';
 import Logo from '../components/Logo';
 import Navigation from '../blocks/Navigation';
 import CalendarSchedule from '../components/CalendarSchedule';
-import Cover from '../components/Cover';
 import Search from '../blocks/Search';
+import Cover from '../components/Cover';
+import InfoButton from '../blocks/InfoButton';
 import { Outlet } from "react-router-dom";
 
 const Layout = (o) => {
@@ -24,13 +25,6 @@ const Layout = (o) => {
         timeline: {
             class: ['schedule']
         },
-        cover: {
-            class: ['profile'],
-            url: profilePath,
-            alt: 'Fake Face',
-            size: 'medium',
-            type: 'rounded'
-        },
         search: {       
             class: ['search'],
             input: {
@@ -41,10 +35,29 @@ const Layout = (o) => {
                 placeholder: 'Search...'
             },
             button: {
-                class: ['search'],
+                class: ['search', 'reset'],
                 iconBefore: 'faMagnifyingGlass'
             }
             
+        },
+        cover: {
+            class: ['profile'],
+            url: profilePath,
+            alt: 'Fake Face',
+            size: 'medium',
+            type: 'rounded'
+        },
+        notifications: {
+            class: ['info', 'notifications'],
+            url: '/notifications',
+            size: 'large',
+            iconBefore: 'faBell'
+        },
+        messages: {
+            class: ['info', 'messages'],
+            url: '/messages',
+            size: 'large',
+            iconBefore: 'faComment'
         }
     }
 
@@ -62,7 +75,11 @@ const Layout = (o) => {
             <Panel class="panel panel--right">
                 <Panel class="panel panel--top">
                     <Search {...props.search}/>
-                    <Cover {...props.cover} />
+                    <Panel class="module module--tools">
+                        <InfoButton {...props.notifications} />
+                        <InfoButton {...props.messages} />
+                        <Cover {...props.cover} />
+                    </Panel>
                 </Panel>
                 <Panel class="panel panel--bottom">
                     <Outlet />
