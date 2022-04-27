@@ -1,14 +1,23 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
-import Badge from '../components/Badge'
+import { addClass, classModifier } from '../functions/utils';
+import '../assets/design/icon.scss';
 
 const Icon = (o) => {
-    const solid = fas[o.value]
+    const defaultClass = 'icon'
+    const classes = classModifier(defaultClass, o.class)
+    const outerProps = {
+        className: addClass(classes)
+    }
+    const innerProps = {
+        icon: fas[o.value],
+        size: o.size
+    }
     return (
-        <>
-            {o.badge && <Badge value={o.badge}/>}
-            <FontAwesomeIcon icon={solid}/>
-        </>
+        <span {...outerProps}>
+            {o.badge}
+            <FontAwesomeIcon {...innerProps} />
+        </span>
     )
 }
 

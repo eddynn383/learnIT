@@ -6,7 +6,7 @@ const Missing = () => {
     const { currentUser } = useAuth()
 
     return (
-        <Container className="d-flex align-items-center justify-content-center" style={{minHeight: "100vh"}}>
+        <Container className="d-flex align-items-center justify-content-center">
             <div className="w-100" style={{maxWidth: "400px"}}>
                 <Card>
                     <Card.Body>

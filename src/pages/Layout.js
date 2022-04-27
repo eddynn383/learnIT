@@ -1,12 +1,14 @@
 import logoPath from '../assets/logo/logo-light.svg';
-import profilePath from '../assets/profile/profile.jpg';
+import coverURL from '../assets/profile/profile.jpg';
 import Panel from '../components/Panel';
 import Logo from '../components/Logo';
 import Navigation from '../blocks/Navigation';
 import CalendarSchedule from '../components/CalendarSchedule';
 import Search from '../blocks/Search';
 import Cover from '../components/Cover';
-import InfoButton from '../blocks/InfoButton';
+import Button from '../components/Button';
+import Icon from '../components/Icon';
+import Badge from '../components/Badge';
 import { Outlet } from "react-router-dom";
 
 const Layout = (o) => {
@@ -40,24 +42,20 @@ const Layout = (o) => {
             }
             
         },
-        cover: {
-            class: ['profile'],
-            url: profilePath,
-            alt: 'Fake Face',
-            size: 'medium',
-            type: 'rounded'
-        },
         notifications: {
-            class: ['info', 'notifications'],
-            url: '/notifications',
-            size: 'large',
-            iconBefore: 'faBell'
+            class: ['notifications', 'icon', 'medium', 'reset'],
+            type: 'button',
+            iconBefore: <Icon class={['faBell']} value="faBell" badge={<Badge class={['notification']} maxValue={50} value={120} size="small" />} />
         },
         messages: {
-            class: ['info', 'messages'],
-            url: '/messages',
-            size: 'large',
-            iconBefore: 'faComment'
+            class: ['messages', 'icon', 'medium', 'reset'],
+            type: 'button',
+            iconBefore: <Icon class={['faComment']} value="faComment" badge={<Badge class={['messages']} maxValue={99} value={52} size="small" />} />
+        },
+        profile: {
+            class: ['profile', 'cover', 'medium', 'reset'],
+            type: 'button',
+            cover: <Cover class={['button-cover']} url={coverURL} alt="test" size="medium" type="rounded"/>
         }
     }
 
@@ -76,9 +74,9 @@ const Layout = (o) => {
                 <Panel class="panel panel--top">
                     <Search {...props.search}/>
                     <Panel class="module module--tools">
-                        <InfoButton {...props.notifications} />
-                        <InfoButton {...props.messages} />
-                        <Cover {...props.cover} />
+                        <Button {...props.notifications} />
+                        <Button {...props.messages} />
+                        <Button {...props.profile} />
                     </Panel>
                 </Panel>
                 <Panel class="panel panel--bottom">

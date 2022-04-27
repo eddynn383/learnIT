@@ -1,5 +1,6 @@
 import Input from '../components/Input';
 import Button from '../components/Button';
+import Icon from '../components/Icon';
 import { addClass, classModifier } from '../functions/utils';
 import '../assets/design/search.scss'
 
@@ -21,7 +22,7 @@ const Search = (o) => {
         button: {
             class: o.button.class,
             type: 'button',
-            iconBefore: o.button.iconBefore
+            iconBefore: <Icon class={[o.button.iconBefore]} value={o.button.iconBefore} />
         }
     }
     return (

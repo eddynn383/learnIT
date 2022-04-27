@@ -1,10 +1,7 @@
 // this function combine multiple classes arrays in one and convert the resulted array into a string
 // args : args is used to get all function arguments: [type: array]
 export const addClass = (...args) => {
-    // const a = [...args]
     const a = args?.flat()
-    // console.log(Array.isArray(args[0]))
-    // console.log(a)
     return a?.join(' ')
 }
 
@@ -12,7 +9,8 @@ export const addClass = (...args) => {
 // a : default class of the component: [type: string]
 // b : an array with custom classes which will be modify the default class: [type: array]
 export const classModifier = (a, b) => {
-    const c = b?.map(e => `${a}--${e}`)
+    if(!b) return
+    const c = b.map(e => `${a}--${e}`)
     b && c?.unshift(a)
     return c
 }

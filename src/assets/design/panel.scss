@@ -15,11 +15,14 @@
         padding-top:20px;
     }
     &--right {
-        width: calc(100% - 400px)
+        width: calc(100% - 400px);
     }
     &--right &--top {
         display: flex;
         justify-content: space-between;
+        padding: 30px;
+    }
+    &--right &--bottom {
         padding: 30px;
     }
 }

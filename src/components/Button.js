@@ -1,5 +1,3 @@
-import Text from './Text';
-import Icon from './Icon';
 import { classModifier, addClass } from '../functions/utils';
 import '../assets/design/button.scss'
 
@@ -14,11 +12,19 @@ const Button = (o) => {
         'data-size': o.size
     }
 
+    const innerProps = {
+        iconBefore: o.iconBefore,
+        text: o.text,
+        iconAfter: o.iconAfter,
+        cover: o.cover
+    }
+
     return (
         <button {...outerProps}>
-            {o.iconBefore && <Icon value={o.iconBefore} />} 
-            {o.text && <Text type="inline">{o.text}</Text>}   
-            {o.iconAfter && <Icon value={o.iconAfter} />} 
+            {innerProps.iconBefore}
+            {innerProps.text}
+            {innerProps.iconAfter}
+            {(!innerProps.iconBefore && !innerProps.text && !innerProps.iconAfter) && innerProps.cover}
         </button>
     )
 }

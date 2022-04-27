@@ -11,7 +11,7 @@ const input = (o) => {
 
     const innerProps = {
         id: o.id,
-        'data-type': o.type,
+        type: o.type,
         'data-size': o.size,
         placeholder: o.placeholder
     }
