@@ -1,11 +1,35 @@
 .button {
     border-radius: 5px;
+    font-family: 'Work Sans', sans-serif;
     cursor: pointer;
     &--reset {
         background-color: transparent;
         border: none;
         padding: 0;
         margin: 0;
+    }
+    &--primary {
+        background-color: #BF4640;
+        color: #fff;
+        transition: .3s ease-in-out;
+        &:hover {
+            background-color: #282828;
+        }
+    }
+    &--primary.button--small {
+        font-size: 14px;
+        line-height: 16px;
+        padding: 5px 10px;
+    }
+    &--primary.button--medium {
+        font-size: 16px;
+        line-height: 18px;
+        padding: 10px 20px;
+    }
+    &--primary.button--large {
+        font-size: 20px;
+        line-height: 22px;
+        padding: 10px 20px;
     }
     &--search {
         font-size: 16px;
@@ -30,29 +54,32 @@
         align-items: center;
         text-align: center;
         line-height: 1;
+        &:hover,
+        &:focus {
+            background-color: #BF4640;
+            color: #fff;
+        }
+    }
+    &--icon.button--small {
+        font-size: 16px;
+        width: 28px;
+        height: 28px;
+    }
+    &--icon.button--medium {
+        font-size: 24px;
+        width: 40px;
+        height: 40px;
+    }
+    &--icon.button--large {
+        font-size: 28px;
+        width: 54px;
+        height: 54px;
     }
     &--cover {
         border-radius: 50%;
         height: fit-content;
     }
-    &--small {
-        font-size: 16px;
-        width: 28px;
-        height: 28px;
-    }
-    &--medium {
-        font-size: 24px;
-        width: 40px;
-        height: 40px;
-    }
-    &--large {
-        font-size: 28px;
-        width: 54px;
-        height: 54px;
-    }
-    &:hover,
-    &:focus {
-        background-color: #BF4640;
-        color: #fff;
+    &--submit {
+        margin-top: 20px;
     }
 }

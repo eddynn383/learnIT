@@ -10,7 +10,7 @@ export const addClass = (...args) => {
 // b : an array with custom classes which will be modify the default class: [type: array]
 export const classModifier = (a, b) => {
     if(!b) return
-    const c = b.map(e => `${a}--${e}`)
+    const c = b?.map(e => `${a}--${e}`)
     b && c?.unshift(a)
     return c
 }

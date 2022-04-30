@@ -10,6 +10,7 @@ import Button from '../components/Button';
 import Icon from '../components/Icon';
 import Badge from '../components/Badge';
 import { Outlet } from "react-router-dom";
+import Dropdown from '../blocks/Dropdown';
 
 const Layout = (o) => {
     const props = {
@@ -43,19 +44,23 @@ const Layout = (o) => {
             
         },
         notifications: {
-            class: ['notifications', 'icon', 'medium', 'reset'],
+            class: ['notifications', 'icon', 'reset'],
+            size: 'medium',
             type: 'button',
             iconBefore: <Icon class={['faBell']} value="faBell" badge={<Badge class={['notification']} maxValue={50} value={120} size="small" />} />
         },
         messages: {
-            class: ['messages', 'icon', 'medium', 'reset'],
+            class: ['messages', 'icon', 'reset'],
+            size: 'medium',
             type: 'button',
             iconBefore: <Icon class={['faComment']} value="faComment" badge={<Badge class={['messages']} maxValue={99} value={52} size="small" />} />
         },
         profile: {
-            class: ['profile', 'cover', 'medium', 'reset'],
+            class: ['profile', 'cover', 'reset'],
+            size: 'medium',
             type: 'button',
-            cover: <Cover class={['button-cover']} url={coverURL} alt="test" size="medium" type="rounded"/>
+            cover: <Cover class={['button-cover']} url={coverURL} alt="test" size="medium" type="rounded"/>,
+            content: <Navigation class={['profile']} />
         }
     }
 
@@ -74,9 +79,9 @@ const Layout = (o) => {
                 <Panel class="panel panel--top">
                     <Search {...props.search}/>
                     <Panel class="module module--tools">
-                        <Button {...props.notifications} />
-                        <Button {...props.messages} />
-                        <Button {...props.profile} />
+                        <Dropdown {...props.notifications}/>
+                        <Dropdown {...props.messages}/>
+                        <Dropdown {...props.profile}/>
                     </Panel>
                 </Panel>
                 <Panel class="panel panel--bottom">

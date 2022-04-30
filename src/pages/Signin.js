@@ -1,8 +1,13 @@
 import React, { useState, useRef } from "react";
 import useAuth from '../hooks/useAuth';
+import Form from '../blocks/Form';
+import Label from '../components/Label';
 import Input from '../components/Input';
+import Checkbox from '../components/Checkbox';
+import Button from '../components/Button';
+import Icon from '../components/Icon';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { Container, Card, Form, Button, Alert } from 'react-bootstrap';
+import { Container, Card, Alert } from 'react-bootstrap';
 
 
 const Signin = (o) => {
@@ -20,20 +25,37 @@ const Signin = (o) => {
 
     const from = location.state?.from?.pathname || '/'
 
-    console.log(from)
-
     const props = {
         email: {
             class: ['email'],
-            type: 'email',
-            ref: emailRef,
+            id: 'email',
+            label: <Label for="email">Email</Label>,
+            placeholder: 'Enter your email',
+            outerRef: emailRef,
             required: true
         },
         password: {
             class: ['password'],
-            type: type === '' ? 'password' : type,
-            ref: passwordRef,
+            id: 'password',
+            label: <Label for="password">Password</Label>,
+            placeholder: 'Enter your password',
+            outerRef: passwordRef,
             required: true
+        },
+        checkbox: {
+            class: ['checkbox'],
+            id: 'show-password',
+            label: 'Show Password',
+            type: 'checkbox',
+            checkmark: <Icon class={['faCheck']} value='faCheck'/>
+        },
+        button: {
+            class: ['submit', 'reset'],
+            type: 'submit',
+            size: 'medium',
+            text: 'Submit',
+            theme: 'primary',
+            disabled: loading
         }
     }
 
@@ -74,37 +96,25 @@ const Signin = (o) => {
     }
 
     const handleCheckbox = (e) => {
+        console.log(e)
         e.target.checked ? setType('text') : setType('password')
     }
 
     return (
         <>
-            <Container className="d-flex align-items-center justify-content-center" style={{minHeight: "100vh"}}>
-                <div className="w-100" style={{maxWidth: "400px"}}>
-                    <Card>
-                        <Card.Body>
-                            <h2 className="text-center mb-4">Sign In</h2>
-                            {message && <Alert variant="danger">{message}</Alert>}
-                            <Form onSubmit={handleSubmit}>
-                                <Form.Group id="email" className="mb-4">
-                                    <Form.Label>Email</Form.Label>
-                                    <Input {...props.email} />
-                                </Form.Group>
-                                <Form.Group id="password" className="mb-4">
-                                    <Form.Label>Password</Form.Label>
-                                    <Input {...props.password} />
-                                </Form.Group>
-                                <Form.Check type="checkbox" id="show-password" label="Show Password" className="mb-4" onClick={handleCheckbox}/>
-                                <Button disabled={loading} className="w-100" type="submit">Sign In</Button>
-                                {/* <Button onClick={handleClick} className="w-100" type="submit">Get Role</Button> */}
-                            </Form>
-                        </Card.Body>
-                    </Card>
-                    <div className="w-100 text-center mt-2">
-                        Need an account? <Link to="/signup">Sign Up</Link>
-                    </div>
-                </div>
-            </Container>
+        <div className="w-100" style={{maxWidth: "400px"}}>
+            <h2 className="text-center mb-4">Sign In</h2>
+            {message && <Alert variant="danger">{message}</Alert>}
+            <Form class={['signin']} onSubmit={handleSubmit}>
+                <Input {...props.email} type="email"/>
+                <Input {...props.password} type={type === '' ? 'password' : type}/>
+                <Checkbox {...props.checkbox} onclick={handleCheckbox}/>
+                <Button {...props.button}>Sign In</Button>
+            </Form>
+            <div className="w-100 text-center mt-2">
+                Need an account? <Link to="/signup">Sign Up</Link>
+            </div>
+        </div>
         </>
     )
 }

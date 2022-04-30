@@ -1,7 +1,14 @@
 import React, { useState, useRef } from 'react';
 import useAuth from '../hooks/useAuth';
 import { Link } from 'react-router-dom';
-import { Container, Card, Form, Button, Alert } from 'react-bootstrap';
+import { Container, Card, Alert } from 'react-bootstrap';
+
+import Form from '../blocks/Form';
+import Label from '../components/Label';
+import Input from '../components/Input';
+import Checkbox from '../components/Checkbox';
+import Button from '../components/Button';
+import Icon from '../components/Icon';
 
 // const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 // const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -21,6 +28,48 @@ const Signup = () => {
     const [messageType, setMessageType] = useState('success')
 
     console.log(currentUser && currentUser)
+
+    const props = {
+        email: {
+            class: ['email'],
+            id: 'email',
+            type: 'email',
+            label: <Label for="email">Email</Label>,
+            outerRef: emailRef,
+            required: true
+        },
+        password: {
+            class: ['password'],
+            id: 'password',
+            type: type === '' ? 'password' : type,
+            label: <Label for="password">Password</Label>,
+            outerRef: passwordRef,
+            required: true
+        },
+        passwordConfirmation: {
+            class: ['password-confirmation'],
+            id: 'passwordConfirmation',
+            type: type === '' ? 'password' : type,
+            label: <Label for="passwordConfirmation">Confirm Password</Label>,
+            outerRef: passwordConfirmationRef,
+            required: true
+        },
+        checkbox: {
+            class: ['checkbox'],
+            id: 'show-password',
+            label: 'Show Password',
+            type: 'checkbox',
+            checkmark: <Icon class={['faCheck']} value='faCheck'/>
+        },
+        button: {
+            class: ['submit', 'reset'],
+            type: 'submit',
+            size: 'medium',
+            text: 'Submit',
+            theme: 'primary',
+            disabled: loading
+        }
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -57,13 +106,20 @@ const Signup = () => {
 
     return (
         <>
-            <Container className="d-flex align-items-center justify-content-center" style={{minHeight: "100vh"}}>
+            <Container className="d-flex align-items-center justify-content-center">
                 <div className="w-100" style={{maxWidth: "400px"}}>
                     <Card>
                         <Card.Body>
                             <h2 className="text-center mb-4">Sign Up</h2>
                             {message && <Alert variant={messageType}>{message}</Alert>}
                             <Form onSubmit={handleSubmit}>
+                                <Input {...props.email}/>
+                                <Input {...props.password}/>
+                                <Input {...props.passwordConfirmation}/>
+                                <Checkbox {...props.checkbox} onclick={handleCheckbox}/>
+                                <Button {...props.button}>Sign In</Button>
+                            </Form>
+                            {/* <Form onSubmit={handleSubmit}>
                                 <Form.Group id="email" className="mb-4">
                                     <Form.Label>Email</Form.Label>
                                     <Form.Control type="email" ref={emailRef} required />
@@ -78,7 +134,7 @@ const Signup = () => {
                                 </Form.Group>
                                 <Form.Check type="checkbox" id="show-password" label="Show Password" className="mb-4" onClick={handleCheckbox}/>
                                 <Button disabled={loading} className="w-100" type="submit">Sign Up</Button>
-                            </Form>
+                            </Form> */}
                         </Card.Body>
                     </Card>
                     <div className="w-100 text-center mt-2">

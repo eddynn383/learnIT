@@ -18,8 +18,6 @@ const Badge = (o) => {
         return null;
     }
 
-    console.log(o)
-
     return (
         <span {...outerProps}>{text}</span>
     )

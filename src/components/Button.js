@@ -1,15 +1,18 @@
+import { useState } from 'react';
 import { classModifier, addClass } from '../functions/utils';
 import '../assets/design/button.scss'
 
 const Button = (o) => {
     const defaultClass = 'button'
-    const classes = classModifier(defaultClass, o.class)
+    const classes = classModifier(defaultClass, [...o.class, o.theme, o.size])
     
     const outerProps = {
         className: addClass(classes),
         id: o.id,
         type: o.type,
-        'data-size': o.size
+        size: o.size,
+        theme: o.theme,
+        onClick: o.onClick
     }
 
     const innerProps = {

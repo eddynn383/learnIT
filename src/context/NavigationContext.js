@@ -1,4 +1,5 @@
-import { createContext } from 'react';
+import { useState, useEffect, createContext } from 'react';
+import useAuth from '../hooks/useAuth';
 
 const defaultNav = [{
     text: 'Dashboard',
@@ -33,13 +34,28 @@ const defaultNav = [{
     iconBefore: 'faVial'
 }]
 
-const NavigationContext = createContext(defaultNav)
+const NavigationContext = createContext()
 
-export const NavigationProvider = ({ children, nav = defaultNav }) => (
-    <NavigationContext.Provider value={ nav }>
-        {children}
-    </NavigationContext.Provider>
-)
+export const NavigationProvider = ({ children }) => {
+    const { getDB, setDB, getSnapshot, currentUser } = useAuth()
+    // console.log(currentUser)
+    // console.log(children)
+
+    // useEffect(() => {
+    //     const nav = getDB('navigation', 100)
+        
+    //     return nav;
+    // },[])
+
+    // const value = {
+        
+    // }
+    return (
+        <NavigationContext.Provider value={ getSnapshot }>
+            {children}
+        </NavigationContext.Provider>
+    )
+}
 
 export default NavigationContext
 

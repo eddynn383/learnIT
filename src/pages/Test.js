@@ -25,7 +25,7 @@ const Test = () => {
     }
     return (
         <>
-            <div style={{display: 'flex', 'justify-content': 'space-araound'}}>
+            <div style={{display: 'flex', justifyContent: 'space-araound'}}>
                 <Icon {...innerProps.icon} />
                 <Input {...innerProps.input} />
                 <Button {...innerProps.button} />

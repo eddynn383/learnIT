@@ -1,7 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 import { auth, db } from "../firebase";
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { setDoc, getDoc, doc } from "firebase/firestore";
+import { setDoc, getDoc, onSnapshot, doc } from "firebase/firestore";
 
 const FirebaseContext = createContext();
 
@@ -15,6 +15,10 @@ export const FirebaseProvider = ({ children }) => {
 
     const setDB = (dbName, dbTarget, dbValue) => {
         return setDoc(doc(db, dbName, dbTarget), dbValue)
+    }
+
+    const getSnapshot = (dbName, dbTarget) => {
+        return onSnapshot(doc(db, dbName, dbTarget), (doc) => doc.data())
     }
 
     const signup = (email, password) => {
@@ -45,7 +49,8 @@ export const FirebaseProvider = ({ children }) => {
         signin,
         signout,
         getDB,
-        setDB
+        setDB,
+        getSnapshot
     }
 
     return (
